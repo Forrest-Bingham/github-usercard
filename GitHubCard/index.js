@@ -83,17 +83,18 @@ function User(info) {
   const newCard = document.createElement("div"),
     newImage = document.createElement("img"),
     cardInfo = document.createElement("div"),
+    personInfo = document.createElement("div"),
     name = document.createElement("h3"),
     username = document.createElement("p"),
-    panelButtons = document.createElement("div");
-  (buttonOpen = document.createElement("button")),
-    (buttonClose = document.createElement("button")),
-    (location = document.createElement("p")),
-    (profile = document.createElement("p")),
-    (anchor = document.createElement("a")),
-    (followers = document.createElement("p")),
-    (following = document.createElement("p")),
-    (bio = document.createElement("p"));
+    panelButtons = document.createElement("div"),
+    buttonOpen = document.createElement("button"),
+    buttonClose = document.createElement("button"),
+    location = document.createElement("p"),
+    profile = document.createElement("p"),
+    anchor = document.createElement("a"),
+    followers = document.createElement("p"),
+    following = document.createElement("p"),
+    bio = document.createElement("p");
 
   newCard.classList.add("card");
 
@@ -102,15 +103,18 @@ function User(info) {
 
   name.classList.add("name");
   username.classList.add("username");
+  cardInfo.classList.add("cardInfo");
   location.classList.add("p");
   profile.classList.add("p");
   followers.classList.add("p");
   following.classList.add("p");
   bio.classList.add("p");
-
+  panelButtons.classList.add("panel-buttons");
   buttonOpen.classList.add("panel-btn-open");
   buttonClose.classList.add("panel-btn-close");
   buttonClose.classList.add("hide-btn");
+  personInfo.classList.add("personInfo");
+  personInfo.classList.add("toggle-on");
 
   name.textContent = info.name;
   username.textContent = `Username: ${info.login}`;
@@ -126,16 +130,36 @@ function User(info) {
   newCard.appendChild(newImage);
   newCard.appendChild(cardInfo);
   newCard.appendChild(panelButtons);
-  newCard.appendChild(buttonOpen);
-  newCard.appendChild(buttonClose);
-  cardInfo.appendChild(name);
-  cardInfo.appendChild(username);
+  panelButtons.appendChild(buttonOpen);
+  panelButtons.appendChild(buttonClose);
+  cardInfo.appendChild(personInfo);
+  /* 
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  profile.appendChild(anchor);
+    profile.appendChild(anchor);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
-  cardInfo.appendChild(bio);
+  cardInfo.appendChild(bio);*/
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  personInfo.appendChild(location);
+  personInfo.appendChild(profile);
+
+  profile.appendChild(anchor);
+  personInfo.appendChild(followers);
+  personInfo.appendChild(following);
+  personInfo.appendChild(bio);
+
+  panelButtons.addEventListener("click", event => {
+    console.log("button clicked");
+    //1. toggle hide-btn on BOTH buttons
+    buttonOpen.classList.toggle("hide-btn");
+    buttonClose.classList.toggle("hide-btn");
+
+    //2. Change visibility of content with "Toggle-On"
+    personInfo.classList.toggle("toggle-on");
+  });
 
   return newCard;
 }
